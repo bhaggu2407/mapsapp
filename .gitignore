@@ -33,3 +33,7 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+node_modules/
+.expo/
+npm-debug.log
+yarn-error.log
