@@ -2,13 +2,15 @@ import React from "react";
 import {
   View,
   TextInput,
-  FlatList,
+  ScrollView,
   TouchableOpacity,
   Text,
   StyleSheet,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const AutocompleteInput = ({
+  placeholder,
   searchQuery,
   setSearchQuery,
   searchResults,
@@ -18,37 +20,32 @@ const AutocompleteInput = ({
     <View style={styles.searchContainer}>
       <TextInput
         style={styles.input}
-        placeholder="Search for a location"
+        placeholder={placeholder}
         value={searchQuery}
         onChangeText={setSearchQuery}
         onFocus={() => console.log("focused")}
       />
-      <FlatList
-        data={searchResults}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleLocationSelect(item)}>
+      <ScrollView>
+        {searchResults.map((item) => (
+          <TouchableOpacity
+            key={item.eLoc}
+            onPress={() => handleLocationSelect(item)}
+          >
             <Text style={styles.resultItem}>{item.properties.name}</Text>
           </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item.eLoc}
-      />
+        ))}
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   searchContainer: {
-    position: "absolute",
-    top: 40,
-    left: 10,
-    right: 10,
-    width: 200,
-    marginTop: 100,
-    marginLeft: 100,
     backgroundColor: "white",
     borderRadius: 5,
     elevation: 5,
     zIndex: 9999999,
+    marginVertical: 5,
   },
   input: {
     height: 40,
