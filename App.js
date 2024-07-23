@@ -7,6 +7,7 @@ import TransportationModeSelector from "./components/TransportationModeSelector"
 
 export default function App() {
   const webViewRef = useRef(null);
+  const [location, setLocation] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchQueryStart, setSearchQueryStart] = useState("");
   const [searchQueryEnd, setSearchQueryEnd] = useState("");
@@ -148,18 +149,26 @@ export default function App() {
     }
   };
 
+  const handleItemPress = (item) => {
+    setLocation(item)
+  };
+
+
+
   return (
     <View style={styles.container}>
       <MapView
         webViewRef={webViewRef}
+        location= {location}
+        setLocation= {setLocation}
         handleMessage={handleMessage}
         selectedLocation={selectedLocationStart}
         route={route}
       />
       <MainSearchBar
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
+        handleItemPress={handleItemPress}
         onRoutingIconPress={() => setShowRoutingOptions(!showRoutingOptions)}
+        
       />
       {showRoutingOptions && (
         <View style={styles.routingContainer}>
