@@ -13,6 +13,8 @@ const MainSearchBar = ({ handleItemPress,onRoutingIconPress }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
+
+
   async function performAutoComplete(query, setResults) {
     const response = await fetch(
       `http://103.163.69.241/api/v1/places/autocomplete?api_key=05a9e976c1764b2b92fe3ae8cfdd0e37&text=${query}`
